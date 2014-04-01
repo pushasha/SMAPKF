@@ -1,0 +1,117 @@
+fileFormatVersion: 2
+guid: bf63ab198017497449233107fb6b931c
+TextureImporter:
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: -1
+    aniso: 1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spritePixelsToUnits: 10
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: PuppetMan_head
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 742
+        width: 235
+        height: 261
+      alignment: 0
+      pivot: {x: .5, y: .5}
+    - name: PuppetMan_armTop
+      rect:
+        serializedVersion: 2
+        x: 538
+        y: 799
+        width: 188
+        height: 183
+      alignment: 0
+      pivot: {x: .5, y: .5}
+    - name: PuppetMan_gunSide
+      rect:
+        serializedVersion: 2
+        x: 219
+        y: 576
+        width: 316
+        height: 128
+      alignment: 9
+      pivot: {x: .912112534, y: .62494421}
+    - name: PuppetMan_armR
+      rect:
+        serializedVersion: 2
+        x: 892
+        y: 27
+        width: 103
+        height: 369
+      alignment: 0
+      pivot: {x: .5, y: .5}
+    - name: PuppetMan_leg
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 37
+        width: 202
+        height: 494
+      alignment: 0
+      pivot: {x: .5, y: .5}
+    - name: PuppetMan_armBottom
+      rect:
+        serializedVersion: 2
+        x: 287
+        y: 223
+        width: 96
+        height: 207
+      alignment: 0
+      pivot: {x: .5, y: .5}
+    - name: PuppetMan_gunTop
+      rect:
+        serializedVersion: 2
+        x: 473
+        y: 140
+        width: 105
+        height: 314
+      alignment: 7
+      pivot: {x: .5, y: 0}
+    - name: PuppetMan_body
+      rect:
+        serializedVersion: 2
+        x: 591
+        y: 72
+        width: 309
+        height: 693
+      alignment: 0
+      pivot: {x: .5, y: .5}
+  spritePackingTag: 
+  userData: 
