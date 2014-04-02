@@ -24,7 +24,10 @@ public class Puppet2D_Bakedmesh : MonoBehaviour {
 		int i=0;
 		foreach (Transform child in transform)
 		{
-			child.localPosition = baked.vertices[i];
+			if(!System.Single.IsNaN(baked.vertices[i].x))
+				child.localPosition = baked.vertices[i];
+			else
+				Debug.LogWarning("vertex " + i + " is corrupted");
 			i++;
         }
 	}

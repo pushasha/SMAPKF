@@ -1,0 +1,175 @@
+fileFormatVersion: 2
+guid: 55c99cc78e76f574694827204c6b865e
+TextureImporter:
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: -1
+    aniso: 1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings:
+  - buildTarget: iPhone
+    maxTextureSize: 1024
+    textureFormat: -2
+    compressionQuality: 50
+  spriteSheet:
+    sprites:
+    - name: s_legupper
+      rect:
+        serializedVersion: 2
+        x: 393
+        y: 327
+        width: 118
+        height: 218
+      alignment: 9
+      pivot: {x: .451993525, y: .750140965}
+    - name: s_leglower
+      rect:
+        serializedVersion: 2
+        x: 375
+        y: 29
+        width: 141
+        height: 264
+      alignment: 9
+      pivot: {x: .733924806, y: .872239172}
+    - name: s_foottoe
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 28
+        width: 74
+        height: 45
+      alignment: 6
+      pivot: {x: 0, y: 0}
+    - name: s_footheel
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 30
+        width: 95
+        height: 94
+      alignment: 9
+      pivot: {x: .327555358, y: .751385629}
+    - name: s_pelvis
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 208
+        width: 127
+        height: 215
+      alignment: 9
+      pivot: {x: .483643532, y: .248798028}
+    - name: s_armlower
+      rect:
+        serializedVersion: 2
+        x: 253
+        y: 346
+        width: 68
+        height: 141
+      alignment: 9
+      pivot: {x: .425363421, y: .793650746}
+    - name: s_armupper
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 543
+        width: 80
+        height: 155
+      alignment: 9
+      pivot: {x: .538948417, y: .855142295}
+    - name: s_neck
+      rect:
+        serializedVersion: 2
+        x: 349
+        y: 704
+        width: 75
+        height: 107
+      alignment: 9
+      pivot: {x: .0949572772, y: .6704638}
+    - name: s_head
+      rect:
+        serializedVersion: 2
+        x: 347
+        y: 832
+        width: 110
+        height: 108
+      alignment: 9
+      pivot: {x: .141202614, y: .336512804}
+    - name: s_torso
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 735
+        width: 170
+        height: 215
+      alignment: 7
+      pivot: {x: .5, y: 0}
+    - name: s_hand04
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 850
+        width: 63
+        height: 101
+      alignment: 9
+      pivot: {x: .335138708, y: .859918892}
+    - name: s_hand03
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 719
+        width: 63
+        height: 101
+      alignment: 9
+      pivot: {x: .318652868, y: .859918892}
+    - name: s_hand02
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 593
+        width: 67
+        height: 94
+      alignment: 9
+      pivot: {x: .329479158, y: .842524767}
+    - name: s_hand01
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 472
+        width: 67
+        height: 95
+      alignment: 9
+      pivot: {x: .267472059, y: .871718228}
+  spritePackingTag: 
+  userData: 

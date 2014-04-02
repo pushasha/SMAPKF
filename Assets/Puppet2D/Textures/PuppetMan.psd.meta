@@ -81,9 +81,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 64
-        y: 37
+        y: 33
         width: 202
-        height: 494
+        height: 498
       alignment: 0
       pivot: {x: .5, y: .5}
     - name: PuppetMan_armBottom

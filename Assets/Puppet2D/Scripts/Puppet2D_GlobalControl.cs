@@ -6,8 +6,11 @@ using System.Linq;
 [ExecuteInEditMode]
 public class Puppet2D_GlobalControl : MonoBehaviour {
 
+	public float startRotationY;
+
     public List<Puppet2D_IKHandle> _Ikhandles = new List<Puppet2D_IKHandle>();
     public List<Puppet2D_ParentControl> _ParentControls = new List<Puppet2D_ParentControl>();
+
     private List<SpriteRenderer> _Controls = new List<SpriteRenderer>();
     private List<SpriteRenderer> _Bones = new List<SpriteRenderer>();
 
@@ -16,40 +19,71 @@ public class Puppet2D_GlobalControl : MonoBehaviour {
 	public bool CombineMeshes = false;
 
 	public bool flip = false;
+    public bool AutoRefresh = true;
+
+
+
+
+	//public float boneSize;
 	// Use this for initialization
 	void OnEnable () 
     {
-        _Ikhandles.Clear();
-        _ParentControls.Clear();
-        _Controls.Clear();
-        TraverseHierarchy(transform);
+        if (AutoRefresh)
+        {
+            _Ikhandles.Clear();
+            _ParentControls.Clear();
+            _Controls.Clear();
+            TraverseHierarchy(transform);
+        }
+
+	}
+	public void Refresh() 
+	{
+		_Ikhandles.Clear();
+		_ParentControls.Clear();
+		_Controls.Clear();
+		TraverseHierarchy(transform);
+				
 	}
 	void Awake () 
 	{
-
+		if(flip)
+		{
+			
+			transform.localScale = new Vector3(transform.localScale.x,transform.localScale.y,-transform.localScale.z);
+			transform.localEulerAngles = new Vector3(transform.rotation.eulerAngles.x, startRotationY+180, transform.rotation.eulerAngles.z);
+			
+		}
+		else
+		{
+			
+			transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x),Mathf.Abs(transform.localScale.y),Mathf.Abs(transform.localScale.z));
+			transform.localEulerAngles = new Vector3(transform.rotation.eulerAngles.x, startRotationY, transform.rotation.eulerAngles.z);
+			
+		}
 		if(Application.isPlaying)
 		{
-			transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x),Mathf.Abs(transform.localScale.y),Mathf.Abs(transform.localScale.z));
+
 
 			if(CombineMeshes)			
 				CombineAllMeshes();
-
-			if(flip)
-				transform.localScale = new Vector3(-transform.localScale.x,transform.localScale.y,transform.localScale.z);
-
+				
 		}
+	
 		
 	}
 	// Update is called once per frame
     public void Init()
-    {
+    {       
         _Ikhandles.Clear();
         _ParentControls.Clear();
         _Controls.Clear();
         TraverseHierarchy(transform);
+       
     }
 	void OnValidate ()
 	{
+
 		foreach(SpriteRenderer ctrl in _Controls)
 		{
 			if(ctrl)
@@ -61,25 +95,41 @@ public class Puppet2D_GlobalControl : MonoBehaviour {
 				bone.enabled = BonesVisiblity;
 		}
 
+		if(flip)
+		{
+
+			transform.localScale = new Vector3(transform.localScale.x,transform.localScale.y,-transform.localScale.z);
+			transform.localEulerAngles = new Vector3(transform.rotation.eulerAngles.x, startRotationY+180, transform.rotation.eulerAngles.z);
+
+		}
+		else
+		{
+		
+			transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x),Mathf.Abs(transform.localScale.y),Mathf.Abs(transform.localScale.z));
+			transform.localEulerAngles = new Vector3(transform.rotation.eulerAngles.x, startRotationY, transform.rotation.eulerAngles.z);
+
+		}
+
+
+
 	}
 	void Update () 
     {
-
-		transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x),Mathf.Abs(transform.localScale.y),Mathf.Abs(transform.localScale.z));
-
         
         foreach(Puppet2D_ParentControl parentControl in _ParentControls)
         {
 			if(parentControl)
             	parentControl.ParentControlRun();
         }
+        FaceCamera();
         foreach(Puppet2D_IKHandle ik in _Ikhandles)
         {
 			if(ik)
             	ik.CalculateIK();
         }
-		if(flip)
-			transform.localScale = new Vector3(-transform.localScale.x,transform.localScale.y,transform.localScale.z);
+
+
+
 	
 	}
     void TraverseHierarchy(Transform root) 
@@ -107,14 +157,22 @@ public class Puppet2D_GlobalControl : MonoBehaviour {
             if (newIKCtrl)
                 _Ikhandles.Add(newIKCtrl);
 
+
             TraverseHierarchy(child);
 
         }
 
     }
 	void CombineAllMeshes() 
-	{        
-		SkinnedMeshRenderer[] smRenderers = GetComponentsInChildren<SkinnedMeshRenderer>();
+	{      
+        Vector3 originalScale = transform.localScale;
+        Quaternion originalRot = transform.rotation;
+        Vector3 originalPos = transform.position;
+        transform.localScale = Vector3.one;
+        transform.rotation = Quaternion.identity;
+        transform.position = Vector3.zero;
+
+        SkinnedMeshRenderer[] smRenderers = GetComponentsInChildren<SkinnedMeshRenderer>();
 		List<Transform> bones = new List<Transform>();        
 		List<BoneWeight> boneWeights = new List<BoneWeight>();        
 		List<CombineInstance> combineInstances = new List<CombineInstance>();
@@ -192,5 +250,22 @@ public class Puppet2D_GlobalControl : MonoBehaviour {
 		r.sharedMesh.boneWeights = boneWeights.ToArray();
 		r.sharedMesh.bindposes = bindposes.ToArray();
 		r.sharedMesh.RecalculateBounds();
+
+
+        transform.localScale =originalScale;
+        transform.rotation = originalRot;
+        transform.position =originalPos;
 	}
+    void FaceCamera(){
+
+        foreach (Puppet2D_IKHandle p in _Ikhandles) 
+        {
+
+            p.AimDirection = transform.forward.normalized; 
+
+            //change the aiming of IK to the forward vector of the camera 
+
+        }
+
+    }
 }
