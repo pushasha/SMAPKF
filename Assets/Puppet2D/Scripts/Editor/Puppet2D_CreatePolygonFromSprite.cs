@@ -178,8 +178,8 @@ public class Puppet2D_CreatePolygonFromSprite : Editor {
 					{
 						pivot = textureImporter.spritePivot;
 					}
-					newUv.x += ((pivot.x-0.5f)*rec.width)/ spr.texture.width;
-					newUv.y += ((pivot.y-0.5f)*rec.height)/ spr.texture.height;
+					//newUv.x += ((pivot.x-0.5f)*rec.width)/ spr.texture.width;
+					//newUv.y += ((pivot.y-0.5f)*rec.height)/ spr.texture.height;
 					/*
 					if(Application.unityVersion != "4.3.0f4")
 					{
@@ -348,8 +348,8 @@ public class Puppet2D_CreatePolygonFromSprite : Editor {
 				}
 			}
 
-			newUv.x += ((pivot.x-0.5f)*rec.width)/ spr.texture.width;
-			newUv.y += ((pivot.y-0.5f)*rec.height)/ spr.texture.height;
+			//newUv.x += ((pivot.x-0.5f)*rec.width)/ spr.texture.width;
+			//newUv.y += ((pivot.y-0.5f)*rec.height)/ spr.texture.height;
 			
 			
 			uvs[idx] = newUv;

@@ -9,12 +9,13 @@ public class PlayerInput : MonoBehaviour {
 	public float acceleration = 20;
 	//public float jumpHeight = 5;
 
-	public Vector2 jumpForce;
+	public float jumpForce = 1000;
 
 	private float currentSpeed;
 	private float targetSpeed;
 	private Vector2 amountToMove;
-	private bool isJumping = false;
+	public bool isJumping;
+	private float oldY;
 
 	private PlayerPhysics playerPhysics;
 
@@ -22,13 +23,13 @@ public class PlayerInput : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		playerPhysics = GetComponent<PlayerPhysics> ();
-		jumpForce = new Vector2 (0, 50);
+		isJumping = false;
+		jumpForce = 1000;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
-
+		
 		if (Input.GetButtonDown ("Fire1")) {
 			transform.renderer.material.color = Color.red;
 		} else if (Input.GetButtonDown ("Fire2")) {
@@ -39,22 +40,31 @@ public class PlayerInput : MonoBehaviour {
 			transform.renderer.material.color = Color.white;
 		}
 
+		// calculate horizontal movement
 		targetSpeed = Input.GetAxisRaw ("Horizontal") * speed;
 		currentSpeed = IncrementTowards(currentSpeed, targetSpeed, acceleration);
-
 		amountToMove.x = currentSpeed;
+
+		// check if player just landed
+		if (transform.position.y <= oldY + 0.1f && isJumping) {
+			isJumping = false;
+		}
+		// handle jump
 		if (Input.GetButtonDown ("Jump") && !isJumping) {
 			isJumping = true;
-			rigidbody2D.AddForce(jumpForce);
+			oldY = transform.position.y; // save old Y
+			rigidbody2D.AddForce(Vector2.up * jumpForce); // apply jump vector
 		} 
 
-		//if(collider2D     GameObject.Find("Floor").collider2D.
-		//isJumping = false;
-
+		// handle horizontal movement
 		playerPhysics.Move(amountToMove * Time.deltaTime);
+	}// end Update()
 
-	}
-
+	private void onCollisionEnter(Collision col){
+		if (col.collider.tag == "Ground") {
+			isJumping = false;
+		}
+	}//end OnCollisionEnter
 
 	private void OnTriggerEnter(BoxCollider2D other)
 	{
