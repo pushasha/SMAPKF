@@ -3,13 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour {
+	
 
 	public Dictionary<string, Sprite> spriteDict;
+	private RoomManager rm;
 
 	// Use this for initialization
 	void Start () {
 		spriteDict = new Dictionary<string, Sprite>();
 		loadSprites();
+
+		rm = new RoomManager();
+
+
 
 	}
 	
