@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
 [RequireComponent(typeof(PlayerPhysics))]
 
 public class PlayerInput : MonoBehaviour {
+
 
 	public float speed = 8;
 	public float acceleration = 20;
@@ -18,10 +20,14 @@ public class PlayerInput : MonoBehaviour {
 	private float oldY;
 
 	private PlayerPhysics playerPhysics;
+	private GameManager gm;
+	private SpriteRenderer spriteRenderer;
 
 
 	// Use this for initialization
 	void Start () {
+		gm = GameObject.Find ("GameManager").GetComponent<GameManager>();
+		spriteRenderer = GetComponent<SpriteRenderer>();
 		playerPhysics = GetComponent<PlayerPhysics> ();
 		isJumping = false;
 		jumpForce = 1000;
@@ -31,13 +37,13 @@ public class PlayerInput : MonoBehaviour {
 	void Update () {
 		
 		if (Input.GetButtonDown ("Fire1")) {
-			transform.renderer.material.color = Color.red;
+			spriteRenderer.sprite = gm.spriteDict["debug_playerKickLight"]; 
 		} else if (Input.GetButtonDown ("Fire2")) {
-			transform.renderer.material.color = Color.yellow;
+			spriteRenderer.sprite = gm.spriteDict["debug_playerPunchLight"]; 
 		} else if (Input.GetButtonDown ("Fire3")) {
-			transform.renderer.material.color = Color.green;
+			spriteRenderer.sprite = gm.spriteDict["debug_playerPunchHeavy"]; 
 		} else {
-			transform.renderer.material.color = Color.white;
+			spriteRenderer.sprite = gm.spriteDict["debug_playerIdle"]; 
 		}
 
 		// calculate horizontal movement
@@ -66,11 +72,6 @@ public class PlayerInput : MonoBehaviour {
 		}
 	}//end OnCollisionEnter
 
-	private void OnTriggerEnter(BoxCollider2D other)
-	{
-			isJumping = false;
-	}
-
 	private float IncrementTowards(float n, float target, float a)
 	{
 		if (n == target) 
@@ -84,5 +85,8 @@ public class PlayerInput : MonoBehaviour {
 			return(dir == Mathf.Sign(target - n))? n: target;
 				
 		}
-	}
-}
+	}// end incrementTowards
+
+
+
+}// end class
