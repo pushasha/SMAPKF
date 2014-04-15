@@ -7,7 +7,7 @@ using System.Collections;
 public class PlayerInput : MonoBehaviour {
 
 
-	public float speed = 8;
+	public float speed = 4;
 	public float acceleration = 20;
 	//public float jumpHeight = 5;
 
@@ -48,8 +48,8 @@ public class PlayerInput : MonoBehaviour {
 
 		// calculate horizontal movement
 		targetSpeed = Input.GetAxisRaw ("Horizontal") * speed;
-		currentSpeed = IncrementTowards(currentSpeed, targetSpeed, acceleration);
-		amountToMove.x = currentSpeed;
+		//currentSpeed = IncrementTowards(currentSpeed, targetSpeed, acceleration);
+		amountToMove.x = targetSpeed;
 
 		// check if player just landed
 		if (transform.position.y <= oldY + 0.1f && isJumping) {

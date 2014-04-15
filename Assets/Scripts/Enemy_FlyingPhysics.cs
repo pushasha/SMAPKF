@@ -26,7 +26,7 @@ public class Enemy_FlyingPhysics : MonoBehaviour {
 		
 		//currentSpeed = IncrementTowards(currentSpeed, targetSpeed, acceleration);
 		amountToMove.x = GetDirection(playerTransform.position.x, transform.position.x) * 4;
-		amountToMove.y = GetDirection(playerTransform.position.y, transform.position.y) * 4;
+		amountToMove.y = (GetDirection(playerTransform.position.y, transform.position.y) * 4) + 3;
 		
 		if (Mathf.Abs(playerTransform.position.x - transform.position.x) > 3)
 		{
