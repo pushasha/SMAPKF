@@ -2,7 +2,6 @@
 using System.Collections;
 
 
-[RequireComponent(typeof(PlayerPhysics))]
 
 public class PlayerInput : MonoBehaviour {
 
@@ -19,7 +18,7 @@ public class PlayerInput : MonoBehaviour {
 	public bool isJumping;
 	private float oldY;
 
-	private PlayerPhysics playerPhysics;
+
 	private GameManager gm;
 	private SpriteRenderer spriteRenderer;
 
@@ -28,7 +27,6 @@ public class PlayerInput : MonoBehaviour {
 	void Start () {
 		gm = GameObject.Find ("GameManager").GetComponent<GameManager>();
 		spriteRenderer = GetComponent<SpriteRenderer>();
-		playerPhysics = GetComponent<PlayerPhysics> ();
 		isJumping = false;
 		jumpForce = 1000;
 	}
@@ -63,7 +61,7 @@ public class PlayerInput : MonoBehaviour {
 		} 
 
 		// handle horizontal movement
-		playerPhysics.Move(amountToMove * Time.deltaTime);
+		transform.Translate (amountToMove * Time.deltaTime);
 	}// end Update()
 
 	private void onCollisionEnter(Collision col){
