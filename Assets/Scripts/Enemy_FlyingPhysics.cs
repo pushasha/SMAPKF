@@ -24,15 +24,34 @@ public class Enemy_FlyingPhysics : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
+			
 		//currentSpeed = IncrementTowards(currentSpeed, targetSpeed, acceleration);
-		amountToMove.x = GetDirection(playerTransform.position.x, transform.position.x) * 4;
-		amountToMove.y = (GetDirection(playerTransform.position.y, transform.position.y) * 4) + 3;
+
 		
-		if (Mathf.Abs(playerTransform.position.x - transform.position.x) > 3)
+		if (Mathf.Abs (playerTransform.position.x - transform.position.x) > 3) 
 		{
-			transform.Translate (amountToMove * Time.deltaTime);
+			amountToMove.x = GetDirection(playerTransform.position.x, transform.position.x) * 4;
+			amountToMove.y = (GetDirection(playerTransform.position.y, transform.position.y) * 4) + 3;
+
+			orbiting = false;
 			//transform.Rotate ( transform.rotation * Vector2.zero);
+		} else if(Mathf.Abs (playerTransform.position.x - transform.position.x) < 0.5)
+		{
+			amountToMove.x = GetDirection(playerTransform.position.x, transform.position.x) * -4;
+			amountToMove.y = (GetDirection(playerTransform.position.y, transform.position.y) * -4);
+			
+			orbiting = false;
 		}
+
+		else {
+			orbiting = true;
+			amountToMove.x = Random.Range(-5.0F, 5.0F);
+			amountToMove.y = Random.Range(-5.0F, 5.0F);
+
+
+		}
+
+		transform.Translate(amountToMove * Time.deltaTime);
 		
 	}
 	
