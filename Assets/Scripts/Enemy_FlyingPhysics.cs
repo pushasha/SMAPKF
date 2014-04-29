@@ -33,21 +33,21 @@ public class Enemy_FlyingPhysics : MonoBehaviour {
 			amountToMove.x = GetDirection(playerTransform.position.x, transform.position.x) * 4;
 			amountToMove.y = (GetDirection(playerTransform.position.y, transform.position.y) * 4) + 3;
 
-			orbiting = false;
+
 			//transform.Rotate ( transform.rotation * Vector2.zero);
 		} else if(Mathf.Abs (playerTransform.position.x - transform.position.x) < 0.5)
 		{
 			amountToMove.x = GetDirection(playerTransform.position.x, transform.position.x) * -4;
 			amountToMove.y = (GetDirection(playerTransform.position.y, transform.position.y) * -4);
-			
-			orbiting = false;
+
 		}
 
 		else {
-			orbiting = true;
+			/*
+			 * this was the part that makes the flying enemy jitter
 			amountToMove.x = Random.Range(-5.0F, 5.0F);
 			amountToMove.y = Random.Range(-5.0F, 5.0F);
-
+			*/
 
 		}
 
