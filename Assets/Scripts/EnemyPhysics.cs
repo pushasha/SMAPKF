@@ -16,19 +16,32 @@ public class EnemyPhysics : MonoBehaviour {
 
 	private bool isFollowing = false;
 
+	private float atkTimer;
+	private const float atkTime = 3;
+
+
+
 
 	// Use this for initialization
 	void Start () {
 		player = GameObject.Find("Player");
 		playerTransform = player.transform;
+		atkTimer = atkTime;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		
-		//currentSpeed = IncrementTowards(currentSpeed, targetSpeed, acceleration);
 
+		atkTimer -= Time.deltaTime;
+		Debug.Log (atkTimer);
 
+		if (atkTimer <= 0) {
+			renderer.material.color = Color.blue;
+			atkTimer = atkTime;
+		} else {
+			renderer.material.color = Color.white;
+		}
 
 
 		if (!isFollowing) 
@@ -38,9 +51,13 @@ public class EnemyPhysics : MonoBehaviour {
 					isFollowing = true;
 			}
 		} else {
-			if (Mathf.Abs (playerTransform.position.x - transform.position.x) > 3)
+			if (Mathf.Abs (playerTransform.position.x - transform.position.x) > 2)
 			{
 				amountToMove.x = GetDirection(playerTransform.position.x, transform.position.x) * 4;
+			}
+			if(Mathf.Abs (playerTransform.position.x - transform.position.x) < 2)
+			{
+				amountToMove.x = 0;
 			}
 		}
 
