@@ -34,7 +34,7 @@ public class EnemyPhysics : MonoBehaviour {
 		
 
 		atkTimer -= Time.deltaTime;
-		Debug.Log (atkTimer);
+		//Debug.Log (atkTimer);
 
 		if (atkTimer <= 0) {
 			renderer.material.color = Color.blue;

@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour {
 	
 
 	public Dictionary<string, Sprite> spriteDict;
-	private RoomManager rm;
+	public RoomManager rm;
 
 	// Use this for initialization
 	void Start () {

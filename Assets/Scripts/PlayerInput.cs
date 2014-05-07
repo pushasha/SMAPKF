@@ -64,9 +64,14 @@ public class PlayerInput : MonoBehaviour {
 		transform.Translate (amountToMove * Time.deltaTime);
 	}// end Update()
 
-	private void onCollisionEnter(Collision col){
-		if (col.collider.tag == "Ground") {
+	private void OnCollisionEnter2D(Collision2D col){
+		if (col.gameObject.tag == "Ground") {
 			isJumping = false;
+		}
+
+		if (col.gameObject.tag == "Door"){
+			gm.rm.nextRoom();
+			Destroy(col.gameObject);
 		}
 	}//end OnCollisionEnter
 

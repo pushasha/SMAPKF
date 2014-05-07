@@ -15,9 +15,10 @@ public class RoomManager
 	private const int ROOMWIDTH = 8; // 800 px
 	private const int ROOMHEIGHT= 6; // 600 px
 	private const float ROOMSCALE = 2.0f; // scale of room objects
-	private const float FLOORY = -2.0f; // y-pos of floor (used for playing player in next room)
+	private const float TPBUFFER = 0.45f; // translation buffer of movement when teleported
 
 	private GameObject[] rooms;
+	private GameObject pc;
 	private int currentRoomIndex;
 	private float playerSize;
 
@@ -30,8 +31,11 @@ public class RoomManager
 		rooms = new GameObject[3];
 		initRooms();
 
+
 		// get player size for calculations
-		playerSize = GameObject.FindGameObjectWithTag("Player").renderer.bounds.size.x;
+		pc = GameObject.FindGameObjectWithTag("Player");
+		playerSize = pc.renderer.bounds.size.x;
+
 
 		// #DEBUG for testing
 		//nextRoom();
@@ -41,7 +45,8 @@ public class RoomManager
 	public void nextRoom(){
 		Camera.main.transform.position = new Vector3(ROOMWIDTH * ROOMSCALE,0, -10); // move camera to room center
 		currentRoomIndex++; // advance room index number
-		GameObject.FindGameObjectWithTag("Player").transform.position = new Vector3(getRoomX(currentRoomIndex) + playerSize, FLOORY); // move player to room start
+		
+		pc.transform.Translate(new Vector3(playerSize + TPBUFFER, pc.transform.position.y + TPBUFFER));
 
 	}// end nextRoom()
 
@@ -54,12 +59,6 @@ public class RoomManager
 		currentRoomIndex = 0;
 	}
 
-	// used to place player at start of room
-	private float getRoomX(int roomIndex){ 
-
-		float realHalfWidth = (ROOMWIDTH * ROOMSCALE) / 2; // get half the room width
-		return (rooms[roomIndex].transform.position.x - realHalfWidth);
-	}
 
 
 }// end class
