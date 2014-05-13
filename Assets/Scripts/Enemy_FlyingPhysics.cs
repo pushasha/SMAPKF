@@ -5,6 +5,7 @@ public class Enemy_FlyingPhysics : MonoBehaviour {
 	
 	public float maxSpeed = 4;
 	public float acceleration = 20;
+	public float health = 5;
 	
 	private float currentSpeed;
 	private float targetSpeed;
@@ -35,7 +36,7 @@ public class Enemy_FlyingPhysics : MonoBehaviour {
 
 
 			//transform.Rotate ( transform.rotation * Vector2.zero);
-		} else if(Mathf.Abs (playerTransform.position.x - transform.position.x) < 0.5)
+		} else if(Mathf.Abs (playerTransform.position.x - transform.position.x) < 0.5 || Mathf.Abs (playerTransform.position.y - transform.position.y) < 0.5 )
 		{
 			amountToMove.x = GetDirection(playerTransform.position.x, transform.position.x) * -4;
 			amountToMove.y = (GetDirection(playerTransform.position.y, transform.position.y) * -4);
@@ -54,7 +55,15 @@ public class Enemy_FlyingPhysics : MonoBehaviour {
 		transform.Translate(amountToMove * Time.deltaTime);
 		
 	}
-	
+
+	private void OnCollisionEnter2D(Collision2D col)
+	{
+		if (col.gameObject.tag == "Player")
+		{
+			health -= 1;
+		}
+	}//end OnCollisionEnter
+
 	private float IncrementTowards(float n, float target, float a)
 	{
 		if (n == target) 

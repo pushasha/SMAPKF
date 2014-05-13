@@ -8,6 +8,7 @@ public class PlayerInput : MonoBehaviour {
 
 	public float speed = 4;
 	public float acceleration = 20;
+	public float health = 10;
 	//public float jumpHeight = 5;
 
 	public float jumpForce = 1000;
@@ -73,6 +74,12 @@ public class PlayerInput : MonoBehaviour {
 			gm.rm.nextRoom();
 			Destroy(col.gameObject);
 		}
+
+		if (col.gameObject.tag == "Enemy"){
+			health -= 1;
+		}
+		
+		
 	}//end OnCollisionEnter
 
 	private float IncrementTowards(float n, float target, float a)
