@@ -34,7 +34,7 @@ public class RoomManager
 
 		// get player size for calculations
 		pc = GameObject.FindGameObjectWithTag("Player");
-		playerSize = pc.renderer.bounds.size.x;
+		playerSize = 2;
 
 
 		// #DEBUG for testing

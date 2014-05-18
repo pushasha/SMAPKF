@@ -21,13 +21,13 @@ public class PlayerInput : MonoBehaviour {
 
 
 	private GameManager gm;
-	private SpriteRenderer spriteRenderer;
+	private Animator animator;
 
 
 	// Use this for initialization
 	void Start () {
 		gm = GameObject.Find ("GameManager").GetComponent<GameManager>();
-		spriteRenderer = GetComponent<SpriteRenderer>();
+		animator = GetComponentInChildren<Animator>();
 		isJumping = false;
 		jumpForce = 1000;
 	}
@@ -36,17 +36,30 @@ public class PlayerInput : MonoBehaviour {
 	void Update () {
 		
 		if (Input.GetButtonDown ("Fire1")) {
-			spriteRenderer.sprite = gm.spriteDict["debug_playerKickLight"]; 
+			//spriteRenderer.sprite = gm.spriteDict["debug_playerKickLight"];
+			animator.SetTrigger("ActivateKick1");
 		} else if (Input.GetButtonDown ("Fire2")) {
-			spriteRenderer.sprite = gm.spriteDict["debug_playerPunchLight"]; 
+			animator.SetTrigger("ActivateKick2");
+			//spriteRenderer.sprite = gm.spriteDict["debug_playerPunchLight"]; 
 		} else if (Input.GetButtonDown ("Fire3")) {
-			spriteRenderer.sprite = gm.spriteDict["debug_playerPunchHeavy"]; 
-		} else {
-			spriteRenderer.sprite = gm.spriteDict["debug_playerIdle"]; 
+			animator.SetTrigger("ActivatePunch1");
+			//spriteRenderer.sprite = gm.spriteDict["debug_playerPunchHeavy"]; 
+		} 
+		else if(Input.GetButtonDown("Fire4")){
+			animator.SetTrigger("ActivatePunch2");
+		}
+		else {
+			//spriteRenderer.sprite = gm.spriteDict["debug_playerIdle"]; 
 		}
 
 		// calculate horizontal movement
 		targetSpeed = Input.GetAxisRaw ("Horizontal") * speed;
+		if(targetSpeed != 0 && !animator.GetBool("IsRunning") && !isJumping){
+			animator.SetBool("IsRunning", true);
+		}
+		else if (targetSpeed == 0 && animator.GetBool("IsRunning")){
+			animator.SetBool("IsRunning", false);
+		}
 		//currentSpeed = IncrementTowards(currentSpeed, targetSpeed, acceleration);
 		amountToMove.x = targetSpeed;
 
@@ -57,17 +70,27 @@ public class PlayerInput : MonoBehaviour {
 		// handle jump
 		if (Input.GetButtonDown ("Jump") && !isJumping) {
 			isJumping = true;
+			animator.SetBool("IsJumping", true);
+			animator.SetTrigger("ActivateJump");
 			oldY = transform.position.y; // save old Y
 			rigidbody2D.AddForce(Vector2.up * jumpForce); // apply jump vector
-		} 
+		}
+
+		if (isJumping){
+			animator.SetBool("IsRunning", false);
+		}
 
 		// handle horizontal movement
 		transform.Translate (amountToMove * Time.deltaTime);
 	}// end Update()
 
 	private void OnCollisionEnter2D(Collision2D col){
+		Debug.Log ("Blooop");
 		if (col.gameObject.tag == "Ground") {
+
 			isJumping = false;
+			animator.SetBool("IsJumping", false);
+
 		}
 
 		if (col.gameObject.tag == "Door"){
